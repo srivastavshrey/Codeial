@@ -27,3 +27,4 @@ module.exports.createUser = function (req, res) {
 module.exports.signIn = function (req, res) {
   return res.render("user_signin", { title: "Codeial|Sign_In" });
 };
+module.exports.createSession = function (req, res) {};
