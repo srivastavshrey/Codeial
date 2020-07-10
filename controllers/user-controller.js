@@ -1,6 +1,6 @@
 const User = require("../models/user");
 module.exports.profile = function (req, res) {
-  return res.render("profile");
+  return res.render("profile", { title: "Profile" });
 };
 //render the sign up page
 module.exports.signUp = function (req, res) {
@@ -37,4 +37,21 @@ module.exports.createUser = function (req, res) {
 module.exports.signIn = function (req, res) {
   return res.render("user_signin", { title: "Codeial|Sign_In" });
 };
-module.exports.createSession = function (req, res) {};
+//creating session
+module.exports.createSession = function (req, res) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (err) {
+      console.log("Error in finding user in signing in");
+      return;
+    }
+    if (user) {
+      if (user.password != req.body.password) {
+        return res.redirect("back");
+      }
+      res.cookie("user_id", user.id);
+      return res.redirect("/user/profile");
+    } else {
+      return res.redirect("back");
+    }
+  });
+};
