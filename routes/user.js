@@ -7,5 +7,5 @@ router.use(express.static("assets"));
 router.get("/profile", userController.profile);
 router.get("/sign-up", userController.signUp);
 router.get("/sign-in", userController.signIn);
-router.post("/user/create", userController.createUser);
+router.post("/create", userController.createUser);
 module.exports = router;
